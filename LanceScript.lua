@@ -1,5 +1,5 @@
 -- LANCESCRIPT
-script_version = 11.0
+script_version = 11.2
 all_used_cameras = {}
 natives_version = "1676318796"
 util.require_natives(natives_version)
@@ -268,6 +268,7 @@ local friends_in_this_session = {}
 local modders_in_this_session = {}
 local friends_in_session_list = menu.list_action(players_root, translations.friends_in_session, {"friendsinsession"}, "", friends_in_this_session, function(pid, name) menu.trigger_commands("p" .. players.get_name(pid)) end)
 local modders_in_session_list = menu.list_action(players_root, translations.modders_in_session, {"moddersinsession"}, "", modders_in_this_session, function(pid, name) menu.trigger_commands("p" .. players.get_name(pid)) end)
+local recoveries_root = menu.list(online_root, translations.recoveries, {"lsrecoveries"}, "")
 local detections_root = menu.list(online_root, translations.detections, {translations.detections_cmd}, "")
 local protections_root = menu.list(online_root, translations.protections, {translations.protections_cmd}, translations.protections_desc)
 local randomizer_root = menu.list(online_root, translations.randomizer, {translations.randomizer_cmd}, translations.randomizer_desc)
@@ -1276,7 +1277,7 @@ self_root:toggle_loop(translations.laser_eyes, {"lasereyes"}, translations.laser
             -- michael / story mode character
             case 225514697:
             -- imply they're using a story mode ped i guess. i dont know what else to do unless i have data on every single ped
-            pluto_default:
+            default:
                 left_eye_id = 5956
                 right_eye_id = 6468
         end
@@ -5467,7 +5468,7 @@ local function set_up_player_actions(pid)
                 case 14: 
                     send_attacker("CLONE", pid, false, num_attackers)
                     break
-                pluto_default:
+                default:
                     send_attacker(attacker_hashes[index], pid, false, num_attackers, atkgun)
             end
     end)
@@ -6260,6 +6261,22 @@ menu.toggle_loop(speedrun_root, translations.speedrun_checkpoint_collection, {tr
             ENTITY.SET_ENTITY_COORDS(players.user_ped(), c.x, c.y, c.z, false, false, false, false)
         end
     end
+end)
+
+
+menu.toggle_loop(recoveries_root, translations.casino_loop, {"casinoloop"}, translations.casino_loop_desc, function(on)
+    local rig_ref = menu.ref_by_path('Online>Quick Progress>Casino>Slot Machines Outcome')
+    -- E down
+    util.toast("Win")
+    menu.set_value(rig_ref, 1)
+    PAD.SET_CONTROL_VALUE_NEXT_FRAME(2, 201, 1.0)
+    PAD.SET_CONTROL_VALUE_NEXT_FRAME(2, 201, 0.0)
+    util.yield(6000)
+    util.toast("Loss")
+    menu.set_value(rig_ref, 2)
+    PAD.SET_CONTROL_VALUE_NEXT_FRAME(2, 201, 1.0)
+    PAD.SET_CONTROL_VALUE_NEXT_FRAME(2, 201, 0.0)
+    util.yield(6000)
 end)
 
 util.on_transition_finished(function()
