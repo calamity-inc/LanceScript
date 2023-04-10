@@ -6263,22 +6263,6 @@ menu.toggle_loop(speedrun_root, translations.speedrun_checkpoint_collection, {tr
     end
 end)
 
-
-menu.toggle_loop(recoveries_root, translations.casino_loop, {"casinoloop"}, translations.casino_loop_desc, function(on)
-    local rig_ref = menu.ref_by_path('Online>Quick Progress>Casino>Slot Machines Outcome')
-    -- E down
-    util.toast("Win")
-    menu.set_value(rig_ref, 1)
-    PAD.SET_CONTROL_VALUE_NEXT_FRAME(2, 201, 1.0)
-    PAD.SET_CONTROL_VALUE_NEXT_FRAME(2, 201, 0.0)
-    util.yield(6000)
-    util.toast("Loss")
-    menu.set_value(rig_ref, 2)
-    PAD.SET_CONTROL_VALUE_NEXT_FRAME(2, 201, 1.0)
-    PAD.SET_CONTROL_VALUE_NEXT_FRAME(2, 201, 0.0)
-    util.yield(6000)
-end)
-
 util.on_transition_finished(function()
     if random_name_spoof then
         menu.trigger_commands("spoofedname " .. random_string(16))
