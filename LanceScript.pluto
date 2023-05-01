@@ -104,11 +104,6 @@ else
     need_default_translation = false
 end
 
--- BEGIN ANONYMOUS USAGE TRACKING 
-async_http.init('pastebin.com', '2JtCCekD', function() end)
-async_http.dispatch()
--- END ANONYMOUS USAGE TRACKING 
-
 while need_default_translation and not fallback do 
     util.toast("Looks like there was an update! Installing default/english translation now.")
     util.yield()
