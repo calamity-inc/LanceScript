@@ -67,39 +67,12 @@ for i, path in ipairs(filesystem.list_files(translations_dir)) do
 end
 
 local updated = false
-if not table.contains(translation_dir_files, 'last_version.txt') then 
-    updated = true
-    local file = io.open(translations_dir .. "/last_version.txt",'w')
-    file:write(script_version)
-    file:close()
-end
-
--- get version from file
-local f = io.open(translations_dir .. "/last_version.txt",'r')
-version_from_file = f:read('a')
-f:close()
-if tonumber(version_from_file) < script_version then
-    local file = io.open(translations_dir .. "/last_version.txt",'w')
-    file:write(script_version)
-    file:close()
-    updated = true
-end
 
 -- do not play with this unless you want shit breakin!
 local need_default_translation
 local fallback = false
 if not table.contains(translation_dir_files, 'english.lua') or updated then 
-    need_default_translation = true
-    async_http.init('gist.githubusercontent.com', '/stakonum/302f8534e2fca83db59f07cff8a7bbf4/raw', function(data)
-        local file = io.open(translations_dir .. "/english.lua",'w')
-        file:write(data)
-        file:close()
-        need_default_translation = false
-    end, function()
-        util.toast('!!! Failed to retrieve default translation table. All options that would be translated will look weird. Please check your connection to GitHub.')
-        fallback = true
-    end)
-    async_http.dispatch()
+    error("english translation not found")
 else
     need_default_translation = false
 end
