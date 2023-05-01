@@ -282,11 +282,6 @@ local lancescript_root = menu.list(menu.my_root(), translations.misc, {translati
 menu.action(menu.my_root(), translations.disclaimer, {}, translations.disclaimer_text, function() end)
 
 
-async_http.init("gist.githubusercontent.com", "/stakonum/d4e2f55f6f72d2cf7ec490b748099091/raw", function(result)
-    menu.hyperlink(menu.my_root(), translations.discord, result, "")
-end)
-async_http.dispatch()
-
 -- entity-pool gathering handling
 vehicle_uses = 0
 ped_uses = 0
