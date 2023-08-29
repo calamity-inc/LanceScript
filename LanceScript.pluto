@@ -1619,7 +1619,7 @@ menu.toggle_loop(my_vehicle_root, translations.force_spawn_countermeasures, {tra
     if IS_CONTROL_PRESSED(46, 46) then
         local target = GET_OFFSET_FROM_ENTITY_IN_WORLD_COORDS(players.user_ped(), math.random(-5, 5), -30.0, math.random(-5, 5))
         --SHOOT_SINGLE_BULLET_BETWEEN_COORDS(target['x'], target['y'], target['z'], target['x'], target['y'], target['z'], 300.0, true, -1355376991, players.user_ped(), true, false, 100.0)
-        SHOOT_SINGLE_BULLET_BETWEEN_COORDS(target['x'], target['y'], target['z'], target['x'], target['y'], target['z'], 100.0, true, 1198879012, players.user_ped(), true, false, 100.0)
+        SHOOT_SINGLE_BULLET_BETWEEN_COORDS(target['x'], target['y'], target['z'], target['x'], target['y'], target['z'], 100.0, true, 1198879012, players.user_ped(), true, false, 100.0, 0)
     end
 end)
 
@@ -1670,7 +1670,7 @@ menu.click_slider(my_vehicle_root, translations.drop_bombs, {translations.drop_b
         for i=0, num_bombs do
             local veh_size = get_model_size(GET_ENTITY_MODEL(player_cur_car))
             local bomb_pos = GET_OFFSET_FROM_ENTITY_IN_WORLD_COORDS(player_cur_car, 0.0, 0.0, - (veh_size.y - 3.0))
-            SHOOT_SINGLE_BULLET_BETWEEN_COORDS_IGNORE_ENTITY(bomb_pos.x, bomb_pos.y, bomb_pos.z, bomb_pos.x, bomb_pos.y, bomb_pos.z-0.1, 100.0, true, -1312131151, players.user_ped(), true, false, 100, player_cur_car)
+            SHOOT_SINGLE_BULLET_BETWEEN_COORDS_IGNORE_ENTITY(bomb_pos.x, bomb_pos.y, bomb_pos.z, bomb_pos.x, bomb_pos.y, bomb_pos.z-0.1, 100.0, true, -1312131151, players.user_ped(), true, false, 100, player_cur_car, 0)
             util.yield(100)
         end
     end
@@ -2247,7 +2247,7 @@ menu.toggle_loop(silent_aimbotroot, translations.silent_aimbot, {translations.si
                 dmg = sa_odmg
             end
             local veh = GET_VEHICLE_PED_IS_IN(target, false)
-            SHOOT_SINGLE_BULLET_BETWEEN_COORDS_IGNORE_ENTITY(t_pos['x'], t_pos['y'], t_pos['z'], t_pos2['x'], t_pos2['y'], t_pos2['z'], dmg, true, wep, players.user_ped(), true, false, 10000, veh)
+            SHOOT_SINGLE_BULLET_BETWEEN_COORDS_IGNORE_ENTITY(t_pos['x'], t_pos['y'], t_pos['z'], t_pos2['x'], t_pos2['y'], t_pos2['z'], dmg, true, wep, players.user_ped(), true, false, 10000, veh, 0)
         end
     end
 end)
@@ -2441,7 +2441,7 @@ peds_thread = util.create_thread(function (thr)
                             target = GET_ENTITY_COORDS(ped, false)
                             m_coords = GET_ENTITY_COORDS(players.user_ped(), false)
                             if GET_DISTANCE_BETWEEN_COORDS(m_coords.x, m_coords.y, m_coords.z, target.x, target.y, target.z, true) < kill_aura_dist and GET_ENTITY_HEALTH(ped) > 0 then
-                                SHOOT_SINGLE_BULLET_BETWEEN_COORDS(target['x'], target['y'], target['z'], target['x'], target['y'], target['z']+0.1, 300.0, true, 100416529, players.user_ped(), true, false, 100.0)
+                                SHOOT_SINGLE_BULLET_BETWEEN_COORDS(target['x'], target['y'], target['z'], target['x'], target['y'], target['z']+0.1, 300.0, true, 100416529, players.user_ped(), true, false, 100.0, 0)
                             end
                         end
                     end
@@ -5020,14 +5020,14 @@ local function set_up_player_actions(pid)
         local owner = players.user_ped()
         p_type = p_types[index]
         REQUEST_WEAPON_ASSET(p_type)
-        SHOOT_SINGLE_BULLET_BETWEEN_COORDS(target['x'], target['y'], target['z']+0.5, target['x'], target['y'], target['z']+0.6, 100, true, p_type, owner, true, false, 4000.0)
+        SHOOT_SINGLE_BULLET_BETWEEN_COORDS(target['x'], target['y'], target['z']+0.5, target['x'], target['y'], target['z']+0.6, 100, true, p_type, owner, true, false, 4000.0, 0)
     end)
 
     menu.toggle_loop(explosions_root, translations.projectile_loop, {translations.projectile_loop_cmd}, "", function(on)
         local target_ped = GET_PLAYER_PED_SCRIPT_INDEX(pid)
         local target = GET_ENTITY_COORDS(target_ped, false)
         local owner = players.user_ped()
-        SHOOT_SINGLE_BULLET_BETWEEN_COORDS(target['x'], target['y'], target['z']+0.5, target['x'], target['y'], target['z']+0.6, 100, true, p_type, owner, true, false, 4000.0)
+        SHOOT_SINGLE_BULLET_BETWEEN_COORDS(target['x'], target['y'], target['z']+0.5, target['x'], target['y'], target['z']+0.6, 100, true, p_type, owner, true, false, 4000.0, 0)
     end)
 
     menu.action(explosions_root, translations.nuke, {"nuke"}, translations.nuke_desc, function(on)
@@ -5909,25 +5909,6 @@ menu.toggle(protections_root, translations.no_vpn_warn, {"novpnwarn"}, translati
     do_vpn_warn = on
 end, false)
 
-
-
-random_name_spoof = false
-menu.toggle(randomizer_root, translations.random_spoofed_name, {}, translations.randomizer_name_notice, function(on)
-    random_name_spoof = on
-    if on then 
-        menu.trigger_commands("spoofedname " .. random_string(16))
-    end
-end)
-
-
-random_ip_spoof = false
-menu.toggle(randomizer_root, translations.random_spoofed_ip, {}, "", function(on)
-    random_ip_spoof = on
-    if on then 
-        menu.trigger_commands("spoofedip " .. random_ip_address())
-    end
-end)
-
 random_rank_spoof = false
 menu.toggle(randomizer_root, translations.random_spoofed_rank, {}, "", function(on)
     random_rank_spoof = on
@@ -5980,12 +5961,6 @@ menu.toggle_loop(speedrun_root, translations.speedrun_checkpoint_collection, {tr
 end)
 
 util.on_transition_finished(function()
-    if random_name_spoof then
-        menu.trigger_commands("spoofedname " .. random_string(16))
-    end
-    if random_ip_spoof then
-        menu.trigger_commands("spoofedip " .. random_ip_address())
-    end
     if random_rank_spoof then
         menu.trigger_commands("spoofedrank " .. math.random(10000))
     end
@@ -6233,7 +6208,7 @@ players_thread = util.create_thread(function (thr)
                                 end
                             end
                             if kill_this_guy then
-                                SHOOT_SINGLE_BULLET_BETWEEN_COORDS(c.x, c.y, c.z, c.x, c.y, c.z+0.1, 300.0, true, 100416529, players.user_ped(), true, false, 100.0)
+                                SHOOT_SINGLE_BULLET_BETWEEN_COORDS(c.x, c.y, c.z, c.x, c.y, c.z+0.1, 300.0, true, 100416529, players.user_ped(), true, false, 100.0, 0)
                             end
                         end
                     end
