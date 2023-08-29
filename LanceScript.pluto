@@ -1163,9 +1163,9 @@ self_root:toggle_loop(translations.laser_eyes, {"lasereyes"}, translations.laser
         request_ptfx_asset(dictionary)
         USE_PARTICLE_FX_ASSET(dictionary)
         --START_NETWORKED_PARTICLE_FX_NON_LOOPED_AT_COORD(ptfx_name, boneCoord_L.x, boneCoord_L.y, boneCoord_L.z, camRot.x, camRot.y, camRot.z, 2, 0, 0, 0, false)
-        START_PARTICLE_FX_NON_LOOPED_ON_PED_BONE(ptfx_name, ped, 0, 0, 0, 10, -95 + camAim_z / -20, -5, left_eye_id, 1.0, true, true, true)
+        START_NETWORKED_PARTICLE_FX_NON_LOOPED_ON_PED_BONE(ptfx_name, ped, 0, 0, 0, 10, -95 + camAim_z / -20, -5, left_eye_id, 1.0, true, true, true)
         USE_PARTICLE_FX_ASSET(dictionary)
-        START_PARTICLE_FX_NON_LOOPED_ON_PED_BONE(ptfx_name, ped, 0, 0, 0, 10, -95 + camAim_z / -20, 5, right_eye_id, 1.0, true, true, true)
+        START_NETWORKED_PARTICLE_FX_NON_LOOPED_ON_PED_BONE(ptfx_name, ped, 0, 0, 0, 10, -95 + camAim_z / -20, 5, right_eye_id, 1.0, true, true, true)
         local boneCoord_L = raycast_gameplay_cam(-1, 100)[2]
         ADD_EXPLOSION(boneCoord_L.x + math.random(-5, 5), boneCoord_L.y + math.random(-5, 5), boneCoord_L.z + math.random(-2, 2), 2, 100.0, false, true, 0.0, false) 
     end
