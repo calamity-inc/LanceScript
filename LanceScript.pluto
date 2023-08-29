@@ -3796,7 +3796,7 @@ local street_name_ptr = memory.alloc_int()
 local inter_street_name_ptr = memory.alloc_int()
 world_root:toggle_loop(translations.show_road_name, {"showroadname"}, "", function()
     local c = players.get_position(players.user())
-    PATHFIND.GET_STREET_NAME_AT_COORD(c.x, c.y, c.z, street_name_ptr, inter_street_name_ptr)
+    GET_STREET_NAME_AT_COORD(c.x, c.y, c.z, street_name_ptr, inter_street_name_ptr)
     local street_name = memory.read_int(street_name_ptr)
     local inter_street_name = memory.read_int(inter_street_name_ptr)
     if street_name == 0 then 
