@@ -439,9 +439,9 @@ end
 
 -- CREDIT TO NOWIRY
 local function get_entity_owner(entity)
-	local pEntity = entities.handle_to_pointer(entity)
-	local addr = memory.read_long(pEntity + 0xD0)
-	return (addr ~= 0) and memory.read_byte(addr + 0x49) or -1
+    local pEntity = entities.handle_to_pointer(entity)
+    local addr = memory.read_long(pEntity + 0xD0)
+    return (addr ~= 0) and memory.read_byte(addr + 0x49) or -1
 end
 
 local function world_to_screen_coords(x, y, z)
@@ -757,27 +757,27 @@ blue = to_rgb(0.0,0.0,1.0,1.0)
 -- RAYCAST SHIT
 
 local function interpolate(y0, y1, perc)
-	perc = perc > 1.0 and 1.0 or perc
-	return (1 - perc) * y0 + perc * y1
+    perc = perc > 1.0 and 1.0 or perc
+    return (1 - perc) * y0 + perc * y1
 end
 
 
 local function get_health_colour(perc)
-	local result = {a = 255}
-	local r, g, b
-	if perc <= 0.5 then
-		r = 1.0
-		g = interpolate(0.0, 1.0, perc/0.5)
-		b = 0.0
-	else
-		r = interpolate(1.0, 0, (perc - 0.5)/0.5)
-		g = 1.0
-		b = 0.0
-	end
-	result.r = math.ceil(r * 255)
-	result.g = math.ceil(g * 255)
-	result.b = math.ceil(b * 255)
-	return result
+    local result = {a = 255}
+    local r, g, b
+    if perc <= 0.5 then
+        r = 1.0
+        g = interpolate(0.0, 1.0, perc/0.5)
+        b = 0.0
+    else
+        r = interpolate(1.0, 0, (perc - 0.5)/0.5)
+        g = 1.0
+        b = 0.0
+    end
+    result.r = math.ceil(r * 255)
+    result.g = math.ceil(g * 255)
+    result.b = math.ceil(b * 255)
+    return result
 end
 
 
@@ -790,11 +790,11 @@ end
 
 
 local function get_distance_between_entities(entity, target)
-	if not DOES_ENTITY_EXIST(entity) or not DOES_ENTITY_EXIST(target) then
-		return 0.0
-	end
-	local pos = GET_ENTITY_COORDS(entity, true)
-	return GET_ENTITY_COORDS(target, true):distance(pos)
+    if not DOES_ENTITY_EXIST(entity) or not DOES_ENTITY_EXIST(target) then
+        return 0.0
+    end
+    local pos = GET_ENTITY_COORDS(entity, true)
+    return GET_ENTITY_COORDS(target, true):distance(pos)
 end
 
 
@@ -3798,24 +3798,24 @@ local shader_ref = menu.ref_by_path("Game>Rendering>Shader Override")
 local initial_shader_int = menu.get_value(shader_ref)
 
 function sober_up(ped)
-    SET_PED_IS_DRUNK(ped, false)		
-	SET_PED_MOTION_BLUR(ped, false)
-	--ANIMPOSTFX_STOP_ALL()
+    SET_PED_IS_DRUNK(ped, false)        
+    SET_PED_MOTION_BLUR(ped, false)
+    --ANIMPOSTFX_STOP_ALL()
     menu.set_value(shader_ref, initial_shader_int)
-	SHAKE_GAMEPLAY_CAM("DRUNK_SHAKE", 0.0)
-	SET_TIMECYCLE_MODIFIER_STRENGTH(0.0)
+    SHAKE_GAMEPLAY_CAM("DRUNK_SHAKE", 0.0)
+    SET_TIMECYCLE_MODIFIER_STRENGTH(0.0)
     is_high = false
 end
 
 function get_high(ped, time)
     initial_shader_int = menu.get_value(shader_ref)
-	SET_TIMECYCLE_MODIFIER("spectator6")
-	SET_PED_MOTION_BLUR(players.user_ped(), true)
-	SET_PED_IS_DRUNK(players.user_ped(), true)
-	--ANIMPOSTFX_PLAY("ChopVision", 10000001, true)
+    SET_TIMECYCLE_MODIFIER("spectator6")
+    SET_PED_MOTION_BLUR(players.user_ped(), true)
+    SET_PED_IS_DRUNK(players.user_ped(), true)
+    --ANIMPOSTFX_PLAY("ChopVision", 10000001, true)
     menu.set_value(shader_ref, 69)
-	SHAKE_GAMEPLAY_CAM("DRUNK_SHAKE", 3.0)
-	util.yield(high_time)
+    SHAKE_GAMEPLAY_CAM("DRUNK_SHAKE", 3.0)
+    util.yield(high_time)
     sober_up(players.user_ped())
 end
 
@@ -3829,12 +3829,12 @@ self_root:action(translations.hit_bong, {"hitthebong"}, translations.hit_bong_de
         coords.z += 0.2
         request_anim_dict(bong_ad)
         util.request_model(bong_hash, 2000)
-    	local bong = entities.create_object(bong_hash, coords)
-    	ATTACH_ENTITY_TO_ENTITY(bong, ped, GET_PED_BONE_INDEX(ped, 18905), 0.10,-0.25,0.0,95.0,190.0,180.0, true, true, false, true, 1, true, 0)
-    	TASK_PLAY_ANIM(ped, bong_ad, bong_anim, 8.00, -8.00, -1, (2 + 16 + 32), 0.00, 0, 0, 0)
+        local bong = entities.create_object(bong_hash, coords)
+        ATTACH_ENTITY_TO_ENTITY(bong, ped, GET_PED_BONE_INDEX(ped, 18905), 0.10,-0.25,0.0,95.0,190.0,180.0, true, true, false, true, 1, true, 0)
+        TASK_PLAY_ANIM(ped, bong_ad, bong_anim, 8.00, -8.00, -1, (2 + 16 + 32), 0.00, 0, 0, 0)
         util.yield(10000)
         STOP_ANIM_TASK(ped, bong_ad, bong_anim, 1.0)
-    	entities.delete_by_handle(bong)
+        entities.delete_by_handle(bong)
         are_we_high = true
         get_high(ped, high_time)
     end
@@ -4341,13 +4341,13 @@ local function dispatch_griefer_jesus(target)
         local jesus = entities.create_ped(1, -835930287, coords, 90.0)
         SET_ENTITY_INVINCIBLE(jesus, true)
         SET_PED_HEARING_RANGE(jesus, 9999)
-	    SET_PED_CONFIG_FLAG(jesus, 281, true)
+        SET_PED_CONFIG_FLAG(jesus, 281, true)
         SET_PED_COMBAT_ATTRIBUTES(jesus, 5, true)
-	    SET_PED_COMBAT_ATTRIBUTES(jesus, 46, true)
+        SET_PED_COMBAT_ATTRIBUTES(jesus, 46, true)
         SET_PED_CAN_RAGDOLL(jesus, false)
         GIVE_WEAPON_TO_PED(jesus, util.joaat("WEAPON_RAILGUN"), 9999, true, true)
         TASK_GO_TO_ENTITY(jesus, target_ped, -1, -1, 100.0, 0.0, 0)
-    	TASK_COMBAT_PED(jesus, target_ped, 0, 16)
+        TASK_COMBAT_PED(jesus, target_ped, 0, 16)
         SET_PED_ACCURACY(jesus, 100.0)
         SET_PED_COMBAT_ABILITY(jesus, 2)
         --pretty much just a respawn/rationale check
