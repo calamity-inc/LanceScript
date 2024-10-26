@@ -2071,7 +2071,7 @@ end)
 anti_aim = false
 menu.toggle(anti_aim_root, translations.anti_aim, {translations.anti_aim_cmd},  translations.anti_aim_desc, function(on)
     anti_aim = on
-    mod_uses("player", if on then 1 else -1)
+    mod_uses("player", on ? 1 : -1)
 end)
 
 anti_aim_notify = false
@@ -2115,7 +2115,7 @@ end)
 kill_aura = false
 menu.toggle(kill_auraroot, translations.kill_aura, {translations.kill_aura_cmd},  translations.kill_aura_desc, function(on)
     kill_aura = on
-    mod_uses("ped", if on then 1 else -1)
+    mod_uses("ped", on ? 1 : -1)
 end)
 
 kill_aura_peds = false
@@ -2304,7 +2304,7 @@ menu.toggle_loop(weapons_root, translations.rainbow_weapon_tint, {translations.r
         start_tint = GET_PED_WEAPON_TINT_INDEX(plyr, GET_SELECTED_PED_WEAPON(plyr))
         cur_tint = start_tint
     end
-    cur_tint = if cur_tint == 8 then 0 else cur_tint + 1
+    cur_tint = cur_tint == 8 ? 0 : cur_tint + 1
     SET_PED_WEAPON_TINT_INDEX(plyr,GET_SELECTED_PED_WEAPON(plyr), cur_tint)
     util.yield(50)
 end, function()
@@ -2730,13 +2730,13 @@ end)
 rain_peds = false
 menu.toggle(peds_root, translations.rain_peds, {translations.rain_peds_cmd}, "...", function(on)
     rain_peds = on
-    mod_uses("ped", if on then 1 else -1)
+    mod_uses("ped", on ? 1 : -1)
 end)
 
 hooker_esp = false
 menu.toggle(peds_root, translations.hooker_esp, {translations.hooker_esp_cmd}, "...", function(on)
     hooker_esp = on
-    mod_uses("ped", if on then 1 else -1)
+    mod_uses("ped", on ? 1 : -1)
 end)
 
 
@@ -2774,43 +2774,43 @@ end
 ped_no_ragdoll = false
 menu.toggle(ped_attributes_root, translations.no_ragdoll, {translations.no_ragdoll_cmd}, "", function(on)
     ped_no_ragdoll = on 
-    mod_uses("ped", if on then 1 else -1)
+    mod_uses("ped", on ? 1 : -1)
 end)
 
 ped_godmode = false
 menu.toggle(ped_attributes_root, translations.godmode_peds, {translations.godmode_peds_cmd}, "", function(on)
     ped_godmode = on 
-    mod_uses("ped", if on then 1 else -1)
+    mod_uses("ped", on ? 1 : -1)
 end)
 
 ped_no_crits = false
 menu.toggle(ped_attributes_root, translations.no_crits, {translations.no_crits_cmd}, "", function(on)
     ped_no_crits = on 
-    mod_uses("ped", if on then 1 else -1)
+    mod_uses("ped", on ? 1 : -1)
 end)
 
 ped_highperception = false
 menu.toggle(ped_attributes_root, translations.high_perception, {translations.high_perception_cmd}, translations.high_perception_desc, function(on)
     ped_highperception = on 
-    mod_uses("ped", if on then 1 else -1)
+    mod_uses("ped", on ? 1 : -1)
 end)
 
 ped_allcops = false
 menu.toggle(ped_attributes_root, translations.make_all_peds_cops, {translations.make_all_peds_cops_cmd}, "", function(on)
     ped_allcops = on 
-    mod_uses("ped", if on then 1 else -1)
+    mod_uses("ped", on ? 1 : -1)
 end)
 
 ped_theflash = false
 menu.toggle(ped_attributes_root, translations.looney_tunes, {translations.looney_tunes_cmd}, translations.looney_tunes_cmd, function(on)
     ped_theflash = on 
-    mod_uses("ped", if on then 1 else -1)
+    mod_uses("ped", on ? 1 : -1)
 end)
 
 ped_hardened = false
 menu.toggle(ped_attributes_root, translations.hardened, {translations.hardened_cmd}, translations.hardened_desc, function(on)
     ped_hardened = on 
-    mod_uses("ped", if on then 1 else -1)
+    mod_uses("ped", on ? 1 : -1)
 end)
 
 
@@ -2824,7 +2824,7 @@ end)
 php_bars = false
 menu.toggle(peds_root, translations.ped_hp_bars, {translations.ped_hp_bars_cmd}, translations.ped_hp_bars_desc, function(on)
     php_bars = on
-    mod_uses("ped", if on then 1 else -1)
+    mod_uses("ped", on ? 1 : -1)
     if vhp_bars and on then
         notify(translations.ped_hp_bars_warning)
     end
@@ -2833,19 +2833,19 @@ end)
 peds_ignore = false
 menu.toggle(ped_b_root, translations.oblivious_peds, {translations.oblivious_peds_cmd}, translations.oblivious_peds_desc, function(on)
     peds_ignore = on
-    mod_uses("ped", if on then 1 else -1)
+    mod_uses("ped", on ? 1 : -1)
 end)
 
 wantthesmoke = false
 menu.toggle(ped_b_root, translations.peds_attack_me, {translations.peds_attack_me_cmd}, translations.peds_attack_me_desc, function(on)
     wantthesmoke = on
-    mod_uses("ped", if on then 1 else -1)
+    mod_uses("ped", on ? 1 : -1)
 end)
 
 make_peds_cops = false
 menu.toggle(ped_b_root, translations.make_nearby_peds_cops, {translations.make_nearby_peds_cops_cmd}, translations.make_nearby_peds_cops_desc, function(on)
     make_peds_cops = on
-    mod_uses("ped", if on then 1 else -1)
+    mod_uses("ped", on ? 1 : -1)
 end)
 
 menu.toggle(ped_b_root, translations.detroit, {translations.detroit_cmd}, translations.detroit_desc, function(on)
@@ -2855,25 +2855,25 @@ end)
 apose_peds = false
 menu.toggle(ped_b_root, translations.apose_peds, {translations.apose_peds_cmd}, translations.apose_peds_desc, function(on)
     apose_peds = on
-    mod_uses("ped", if on then 1 else -1)
+    mod_uses("ped", on ? 1 : -1)
 end)
 
 roast_voicelines = false
 menu.toggle(ped_voice, translations.roast_voicelines, {translations.roast_voicelines_cmd}, translations.roast_voicelines_desc, function(on)
     roast_voicelines = on
-    mod_uses("ped", if on then 1 else -1)
+    mod_uses("ped", on ? 1 : -1)
 end)
 
 sex_voicelines = false
 menu.toggle(ped_voice, translations.sex_voicelines, {translations.sex_voicelines_cmd}, translations.sex_voicelines_desc, function(on)
     sex_voicelines = on
-    mod_uses("ped", if on then 1 else -1)
+    mod_uses("ped", on ? 1 : -1)
 end)
 
 screamall = false
 menu.toggle(ped_voice, translations.scream, {translations.scream_cmd}, translations.scream_desc, function(on)
     screamall = on
-    mod_uses("ped", if on then 1 else -1)
+    mod_uses("ped", on ? 1 : -1)
 end)
 
 -- VEHICLES
@@ -2985,7 +2985,7 @@ end)
 vehicle_chaos = false
 menu.toggle(vc_root, translations.vehicle_chaos, {translations.vehicle_chaos_cmd}, translations.vehicle_chaos_desc, function(on)
     vehicle_chaos = on
-    mod_uses("vehicle", if on then 1 else -1)
+    mod_uses("vehicle", on ? 1 : -1)
 end)
 
 vc_gravity = true
@@ -3001,7 +3001,7 @@ end)
 vhp_bars = false
 menu.toggle(vehicles_root, translations.vehicle_hp_bars, {translations.vehicle_hp_bars_cmd}, translations.vehicle_hp_bars_cmd, function(on)
     vhp_bars = on
-    mod_uses("vehicle", if on then 1 else -1)
+    mod_uses("vehicle", on ? 1 : -1)
     if php_bars and on then
         notify(translations.vehicle_hp_bars_warn)
     end
@@ -3010,19 +3010,19 @@ end)
 ascend_vehicles = false
 menu.toggle(v_phys_root, translations.ascend_all_nearby_vehicles, {translations.ascend_all_nearby_vehicles_cmd}, translations.ascend_all_nearby_vehicles_desc, function(on)
     ascend_vehicles = on
-    mod_uses("vehicle", if on then 1 else -1)
+    mod_uses("vehicle", on ? 1 : -1)
 end)
 
 rain_vehicles = false
 menu.toggle(v_phys_root, translations.rain_vehicles, {translations.rain_vehicles_cmd}, translations.rain_vehicles_desc, function(on)
     rain_vehicles = on
-    mod_uses("vehicle", if on then 1 else -1)
+    mod_uses("vehicle", on ? 1 : -1)
 end)
 
 inferno = false
 menu.toggle(v_phys_root, translations.inferno, {translations.inferno_cmd}, translations.inferno_desc, function(on)
     inferno = on
-    mod_uses("vehicle", if on then 1 else -1)
+    mod_uses("vehicle", on ? 1 : -1)
 end, false)
 
 
@@ -3066,20 +3066,20 @@ end
 veh_dance = false
 menu.toggle(v_phys_root, translations.vehicle_dance, {translations.vehicle_dance_cmd}, translations.vehicle_dance_desc, function(on)
     veh_dance = on
-    mod_uses("vehicle", if on then 1 else -1)
+    mod_uses("vehicle", on ? 1 : -1)
     start_vehdance_thread()
 end, false)
 
 beep_cars = false
 menu.toggle(vehicles_root, translations.infinite_horn_on_all_nearby_vehicles, {translations.infinite_horn_on_all_nearby_vehicles_cmd}, translations.infinite_horn_on_all_nearby_vehicles_desc, function(on)
     beep_cars = on
-    mod_uses("vehicle", if on then 1 else -1)
+    mod_uses("vehicle", on ? 1 : -1)
 end)
 
 yeetsubmarines = false
 menu.toggle(vehicles_root, translations.yeetsubmarines, { translations.yeetsubmarines_cmd},  translations.yeetsubmarines_desc, function(on)
     yeetsubmarines = on
-    mod_uses("vehicle", if on then 1 else -1)
+    mod_uses("vehicle", on ? 1 : -1)
 end)
 
 menu.action(vehicles_root, translations.teleport_all_vehs_to_me, {translations.teleport_all_vehs_to_me_cmd}, "", function(click_type)
@@ -3096,13 +3096,13 @@ end)
 halt_traffic = false
 menu.toggle(v_traffic_root, translations.halt_traffic, {translations.halt_traffic_cmd}, translations.halt_traffic_desc, function(on)
     halt_traffic = on
-    mod_uses("vehicle", if on then 1 else -1)
+    mod_uses("vehicle", on ? 1 : -1)
 end)
 
 reverse_traffic = false
 menu.toggle(v_traffic_root, translations.reverse_traffic, {translations.reverse_traffic_cmd}, "", function(on)
     reverse_traffic = on
-    mod_uses("vehicle", if on then 1 else -1)
+    mod_uses("vehicle", on ? 1 : -1)
 end)
 
 vehicles_thread = util.create_thread(function (thr)
@@ -3219,7 +3219,7 @@ tp_all_pickups = false
 tp_pickup_tar = players.user_ped()
 menu.toggle(pickups_root, translations.teleport_all_pickups, {translations.teleport_all_pickups_cmd}, translations.teleport_all_pickups_desc, function(on)
     tp_all_pickups = on
-    mod_uses("pickup", if on then 1 else -1)
+    mod_uses("pickup", on ? 1 : -1)
 end)
 
 -- WORLD
@@ -3276,31 +3276,31 @@ end)
 projectile_warn = false
 menu.toggle(projectiles_root, translations.draw_warning, {translations.draw_warning_cmd}, translations.draw_warning_desc, function(on)
     projectile_warn = on
-    mod_uses("object", if on then 1 else -1)
+    mod_uses("object", on ? 1 : -1)
 end)
 
 projectile_cleanse = false
 menu.toggle(projectiles_root, translations.delete_projectiles, {translations.delete_projectiles_cmd}, translations.delete_projectiles_desc, function(on)
     projectile_cleanse = on
-    mod_uses("object", if on then 1 else -1)
+    mod_uses("object", on ? 1 : -1)
 end)
 
 projectile_spaz = false
 menu.toggle(projectiles_root, translations.projectile_spaz, {translations.projectile_spaz_cmd}, translations.projectile_spaz_desc, function(on)
     projectile_spaz = on
-    mod_uses("object", if on then 1 else -1)
+    mod_uses("object", on ? 1 : -1)
 end)
 
 slow_projectiles = false
 menu.toggle(projectiles_root, translations.extremely_slow_projectiles, {translations.extremely_slow_projectiles_cmd}, "", function(on)
     slow_projectiles = on
-    mod_uses("object", if on then 1 else -1)
+    mod_uses("object", on ? 1 : -1)
 end)
 
 blip_projectiles = false
 menu.toggle(projectiles_root, translations.blips_for_projectiles, {translations.blips_for_projectiles_cmd  }, "", function(on)
     blip_projectiles = on
-    mod_uses("object", if on then 1 else -1)
+    mod_uses("object", on ? 1 : -1)
 end)
 
 local function get_closest_projectile()
@@ -3350,12 +3350,12 @@ end)
 l_e_v_on = false
 l_e_o_on = false
 menu.toggle(entity_limits_root, translations.delete_large_vehicles, {translations.delete_large_vehicles_cmd}, "", function(on)
-    mod_uses("vehicle", if on then 1 else -1)
+    mod_uses("vehicle", on ? 1 : -1)
     l_e_v_on = true
 end)
 
 menu.toggle(entity_limits_root, translations.delete_large_objects, {translations.delete_large_objects_cmd}, "", function(on)
-    mod_uses("object", if on then 1 else -1)
+    mod_uses("object", on ? 1 : -1)
     l_e_o_on = true
 end)
 
@@ -3382,7 +3382,7 @@ protected_area_allow_friends = true
 protected_areas_on = false
 
 menu.toggle(protected_areas_root, translations.enforce_areas, {translations.enforce_areas_cmd}, translations.enforce_areas_desc, function(on)
-    mod_uses("player", if on then 1 else -1)
+    mod_uses("player", on ? 1 : -1)
     protected_areas_on = on
 end)
 
@@ -4695,8 +4695,8 @@ local function set_up_player_actions(pid)
         local car = GET_VEHICLE_PED_IS_IN(GET_PLAYER_PED_SCRIPT_INDEX(pid), true)
         if car ~= 0 then
             request_control_of_entity(car)
-            SET_VEHICLE_ENGINE_HEALTH(car, if index == 1 then -4000.0 else 10000.0)
-            SET_VEHICLE_BODY_HEALTH(car, if index == 1 then -4000.0 else 10000.0)
+            SET_VEHICLE_ENGINE_HEALTH(car, index == 1 ? -4000.0 : 10000.0)
+            SET_VEHICLE_BODY_HEALTH(car, index == 1 ? -4000.0 : 10000.0)
             if index == 2 then
                 SET_VEHICLE_FIXED(car)
             end
@@ -4815,7 +4815,7 @@ local function set_up_player_actions(pid)
         local car = GET_VEHICLE_PED_IS_IN(GET_PLAYER_PED_SCRIPT_INDEX(pid), true)
         if car ~= 0 then
             request_control_of_entity(car)
-            speed = if on then 0.0 else 1000.0
+            speed = on ? 0.0 : 1000.0
             SET_ENTITY_MAX_SPEED(car, speed)
         end
     end)
@@ -5529,7 +5529,7 @@ local function set_up_player_actions(pid)
     menu.toggle(npctrolls_root, translations.nearby_peds_combat_player, {translations.nearby_peds_combat_player_desc}, "", function(on)
         combat_tar = GET_PLAYER_PED_SCRIPT_INDEX(pid)
         aped_combat = on
-        mod_uses("ped", if on then 1 else -1)
+        mod_uses("ped", on ? 1 : -1)
     end)
 
     local fill_with_options = {translations.random_peds, translations.cops, translations.strippers, translations.lamar, translations.lester}
@@ -5680,7 +5680,7 @@ end)
 christianity = false
 menu.toggle(aphostile_root, translations.christianity, {translations.christianity_cmd}, translations.christianity_desc, function(on)
     christianity = on 
-    mod_uses("player", if on then 1 else -1)
+    mod_uses("player", on ? 1 : -1)
 end)
 
 apgiveveh_root = menu.list(apfriendly_root, translations.give_vehicle_root, {translations.give_all_vehicle_root_cmd}, "")
@@ -5828,13 +5828,13 @@ end)
 antioppressor = false
 menu.toggle(protections_root, translations.antioppressor, { translations.antioppressor_cmd},  translations.antioppressor_desc, function(on)
     antioppressor = on
-    mod_uses("player", if on then 1 else -1)
+    mod_uses("player", on ? 1 : -1)
 end)
 
 noarmedvehs = false
 menu.toggle(protections_root, translations.delete_armed_vehicles, {translations.delete_armed_vehicles_cmd}, translations.delete_armed_vehicles_desc, function(on)
     noarmedvehs = on
-    mod_uses("player", if on then 1 else -1)
+    mod_uses("player", on ? 1 : -1)
 end)
 
 end_racism = false
@@ -5856,7 +5856,7 @@ end)
 peaceful_mode = false
 menu.toggle(protections_root, translations.peaceful_mode, {}, translations.peaceful_mode_desc, function(on)
     peaceful_mode = on
-    mod_uses("player", if on then 1 else -1)
+    mod_uses("player", on ? 1 : -1)
 end)
 
 do_vpn_warn = false
